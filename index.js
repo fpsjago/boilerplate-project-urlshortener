@@ -1,3 +1,10 @@
+require('dotenv').config();
+const express = require('express');
+const cors = require('cors');
+const app = express();
+
+// Basic Configuration
+const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true }))
@@ -23,7 +30,7 @@ app.post('/api/shorturl/', (req, res) => {
   const url = req.body.url
   const index = fullUrl.indexOf(url)
 
-  if (!url.includes("https://") && !url.includes("http://")) {
+  if (!url.includes("https://") && !url.includes("http://") && !url.includes("www.")) {
     return res.json({ error: 'Invalid url' })
   }
 
